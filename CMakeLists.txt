@@ -1183,13 +1183,12 @@ set(export_name "cryptopp-targets")
 if (BUILD_SHARED)
   export(TARGETS cryptopp-shared
          FILE ${export_name}.cmake )
-  install(
-      TARGETS cryptopp-shared
-      EXPORT ${export_name}
-      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-      LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
+  install(TARGETS cryptopp-shared
+          EXPORT ${export_name}
+          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          )
 endif ()
 
 # Development package
@@ -1198,7 +1197,10 @@ if (BUILD_STATIC)
          FILE ${export_name}.cmake )
   install(TARGETS cryptopp-static
           EXPORT ${export_name}
-          DESTINATION ${CMAKE_INSTALL_LIBDIR})
+          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+          )
 endif ()
 install(FILES ${cryptopp_HEADERS}
         DESTINATION include/cryptopp)
