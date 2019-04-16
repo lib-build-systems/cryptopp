@@ -1,1 +1,1 @@
-include("${CMAKE_CURRENT_LIST_DIR}/cryptopp-targets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/cryptopp.cmake")
