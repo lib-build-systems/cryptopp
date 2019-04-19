@@ -1180,6 +1180,7 @@ endif ()
 # Runtime package
 if (BUILD_SHARED)
   export(TARGETS cryptopp-shared
+         NAMESPACE cryptopp::
          FILE cryptopp-shared-targets.cmake )
   install(TARGETS cryptopp-shared
           EXPORT cryptopp-shared-targets
@@ -1192,6 +1193,7 @@ endif ()
 # Development package
 if (BUILD_STATIC)
   export(TARGETS cryptopp-static
+         NAMESPACE cryptopp::
          FILE cryptopp-static-targets.cmake )
   install(TARGETS cryptopp-static
           EXPORT cryptopp-static-targets
