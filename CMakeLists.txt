@@ -1202,13 +1202,13 @@ if (CMAKE_VERSION VERSION_GREATER  2.8.8)
                                     VERSION ${cryptopp_VERSION_MAJOR}.${cryptopp_VERSION_MINOR}.${cryptopp_VERSION_PATCH}
                                     COMPATIBILITY SameMajorVersion)
   install(FILES cryptopp-config.cmake ${PROJECT_BINARY_DIR}/cryptopp-config-version.cmake
-          DESTINATION lib/cmake/cryptopp)
+          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
   install(EXPORT cryptopp-static-targets
           NAMESPACE cryptopp::
-          DESTINATION lib/cmake/cryptopp)
+          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
   install(EXPORT cryptopp-shared-targets
           NAMESPACE cryptopp::
-          DESTINATION lib/cmake/cryptopp)
+          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
 endif ()
 
 # Tests
