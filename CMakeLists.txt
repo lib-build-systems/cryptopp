@@ -1184,9 +1184,11 @@ if (NOT CMAKE_VERSION VERSION_LESS 2.8.8)
   install(EXPORT cryptopp-static-targets
           NAMESPACE cryptopp::
           DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
-  install(EXPORT cryptopp-shared-targets
-          NAMESPACE cryptopp::
-          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
+  if (BUILD_SHARED)
+    install(EXPORT cryptopp-shared-targets
+            NAMESPACE cryptopp::
+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
+  endif ()
 endif ()
 
 # Tests
