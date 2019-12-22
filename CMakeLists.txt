@@ -545,7 +545,7 @@ set(cryptopp_SOURCES_TEST
 
 # Library sources. You can use the GNUmakefile to generate the list: `make sources`.
 # Makefile sorted them at http://github.com/weidai11/cryptopp/pull/426.
-file(GLOB cryptopp_SOURCES ${SRC_DIR}/*.cpp)
+file(GLOB cryptopp_SOURCES ${SRC_DIR}/*.cpp ${SRC_DIR}/*.c)
 list(SORT cryptopp_SOURCES)
 list(REMOVE_ITEM cryptopp_SOURCES
     ${SRC_DIR}/cryptlib.cpp
