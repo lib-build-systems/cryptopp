@@ -1036,16 +1036,10 @@ endif ()
 if (NOT MSVC)
   set(COMPAT_VERSION ${cryptopp_VERSION_MAJOR}.${cryptopp_VERSION_MINOR})
 
-  if (BUILD_STATIC)
-    set_target_properties(cryptopp-static
-        PROPERTIES
-        OUTPUT_NAME cryptopp)
-  endif ()
   if (BUILD_SHARED)
     set_target_properties(cryptopp-shared
         PROPERTIES
-        SOVERSION ${COMPAT_VERSION}
-        OUTPUT_NAME cryptopp)
+        SOVERSION ${COMPAT_VERSION})
   endif ()
 endif ()
 
@@ -1146,50 +1140,51 @@ endif ()
 # Install
 #============================================================================
 
-set(export_name "cryptopp-targets")
-
 # Runtime package
 if (BUILD_SHARED)
-  export(TARGETS cryptopp-shared
-         NAMESPACE cryptopp::
-         FILE cryptopp-shared-targets.cmake )
   install(TARGETS cryptopp-shared
           EXPORT cryptopp-shared-targets
           RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
           LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
           ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-          )
+	  )
+
+  install(EXPORT cryptopp-shared-targets
+          NAMESPACE cryptopp::
+          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp
+	  #FILE cryptopp-shared-targets.cmake
+	  )
 endif ()
 
 # Development package
 if (BUILD_STATIC)
-  export(TARGETS cryptopp-static
-         NAMESPACE cryptopp::
-         FILE cryptopp-static-targets.cmake )
   install(TARGETS cryptopp-static
-          EXPORT cryptopp-static-targets
           RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
           LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
           ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
           )
 endif ()
-install(FILES ${cryptopp_HEADERS} DESTINATION include/cryptopp)
+
+install(FILES ${cryptopp_HEADERS}
+	DESTINATION include/cryptopp)
 
 # CMake Package
-if (NOT CMAKE_VERSION VERSION_LESS 2.8.8)
-  include(CMakePackageConfigHelpers)
-  write_basic_package_version_file("${PROJECT_BINARY_DIR}/cryptopp-config-version.cmake" VERSION ${cryptopp_VERSION_MAJOR}.${cryptopp_VERSION_MINOR}.${cryptopp_VERSION_PATCH} COMPATIBILITY SameMajorVersion)
-  install(FILES cryptopp-config.cmake ${PROJECT_BINARY_DIR}/cryptopp-config-version.cmake
-          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
-  install(EXPORT cryptopp-static-targets
-          NAMESPACE cryptopp::
-          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
-  if (BUILD_SHARED)
-    install(EXPORT cryptopp-shared-targets
-            NAMESPACE cryptopp::
-            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
-  endif ()
-endif ()
+#if (NOT CMAKE_VERSION VERSION_LESS 2.8.8)
+#  include(CMakePackageConfigHelpers)
+#  write_basic_package_version_file("${PROJECT_BINARY_DIR}/cryptopp-config-version.cmake" VERSION ${cryptopp_VERSION_MAJOR}.${cryptopp_VERSION_MINOR}.${cryptopp_VERSION_PATCH} COMPATIBILITY SameMajorVersion)
+#  install(FILES cryptopp-config.cmake ${PROJECT_BINARY_DIR}/cryptopp-config-version.cmake
+#          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
+#
+#  install(EXPORT cryptopp-static-targets
+#          NAMESPACE cryptopp::
+#          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
+#
+#  if (BUILD_SHARED)
+#    install(EXPORT cryptopp-shared-targets
+#            NAMESPACE cryptopp::
+#            DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cryptopp)
+#  endif ()
+#endif ()
 
 # Tests
 if (BUILD_TESTING)
