@@ -1181,7 +1181,6 @@ if (BUILD_SHARED)
           LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
           ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
           )
-  )
 endif ()
 
 # Development package
